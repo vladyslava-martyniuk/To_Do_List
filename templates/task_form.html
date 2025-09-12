@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {% if mode == 'add' %}Add task{% elif mode == 'edit' %}Edit task{% endif %}
+{% endblock %}
+
+{% block content %}
+<h2>
+  {% if mode == 'add' %}Add task{% elif mode == 'edit' %}Edit task{% endif %}
+</h2>
+
+<form method="post">
+  <label>Task name:</label><br>
+  <input type="text" name="name" value="{{ task.name if task else '' }}" 
+         {% if mode == 'view' or mode == 'delete' %}readonly{% endif %}
+         required><br><br>
+
+  <label>Task description:</label><br>
+  <textarea name="description" {% if mode == 'view' or mode == 'delete' %}readonly{% endif %} required>{{ task.description if task else '' }}</textarea><br><br>
+  <label>Task status:</label><br>
+  <select name="status" {% if mode == 'view' or mode == 'delete' %}readonly{% endif %} required>
+    <option value="todo" {% if task and task.status == 'todo' %}selected{% endif %}>To Do</option>
+    <option value="in_progress" {% if task and task.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+    <option value="done" {% if task and task.status == 'done' %}selected{% endif %}>Done</option>
+  </select><br><br>
+  {% if mode == 'add' %}
+    <button type="submit" id="adminButton">Add</button>
+  {% elif mode == 'edit' %}
+    <button type="submit" id="adminButton" >Save</button>
+  {% endif %}
+</form>
+{% endblock %}
