@@ -1,6 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for
+from base import create_db, drop_db
+
+from models.user import User
+from models.task import Task
 
 app = Flask(__name__)
+
+create_db()
 
 @app.route('/')
 def index():
