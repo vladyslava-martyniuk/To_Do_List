@@ -1,0 +1,37 @@
+import hashlib
+ 
+users = {} 
+ 
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+ 
+def register_user():
+    username = input("Введіть ім'я користувача: ")
+    if username in users:
+        print("Користувач з таким іменем вже існує.")
+        return
+    password = input("Введіть пароль: ")
+    hashed_pw = hash_password(password)
+    users[username] = hashed_pw
+    print("Ви зареєструвались!")
+ 
+def login_user():
+    username = input("Введіть імя користувача: ")
+    password = input("Введіть пароль: ")
+    hashed_pw_input = hash_password(password)
+ 
+    if username in users and users[username] == hashed_pw_input:
+        print("Вхід виконан!")
+    else:
+        print("Не правильне імя користувача або пароль.")
+
+while True:
+    choice = input("Виберіть (реєстрація/вхід/вихід): ").lower()
+    if choice == "реєстрація":
+        register_user()
+    elif choice == "вхід":
+        login_user()
+    elif choice == "вихід":
+        break
+    else:
+        print("Невернірний вибір") 
