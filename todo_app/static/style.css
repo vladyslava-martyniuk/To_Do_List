@@ -1,0 +1,131 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    max-width: 1000px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+h2 {
+    margin-bottom: 15px;
+}
+
+/* Форма */
+.filter-form {
+    margin-bottom: 15px;
+}
+.filter-form input,
+.filter-form select,
+.filter-form button {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+}
+.filter-form button {
+    background: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.filter-form button:hover {
+    background: #0056b3;
+}
+
+/* Таблиця */
+.styled-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+.styled-table th {
+    background: #f4f4f4;
+}
+.styled-table tr:nth-child(even) {
+    background: #fafafa;
+}
+.styled-table tr:hover {
+    background: #f1f1f1;
+}
+
+/* Кнопки */
+.btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    text-decoration: none;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.btn-edit {
+    background: #ffc107;
+    color: #333;
+}
+.btn-edit:hover {
+    background: #e0a800;
+}
+.btn-delete {
+    background: #dc3545;
+    color: white;
+    border: none;
+}
+.btn-delete:hover {
+    background: #b02a37;
+}
+
+/* Немає даних */
+.not-found {
+    color: #888;
+    font-style: italic;
+}
+body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; padding: 20px; }
+.container { max-width: 1000px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+h2 { margin-bottom: 15px; }
+
+.header-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+
+/* Фільтри */
+.filter-form { margin: 12px 0 16px; }
+.filter-form input, .filter-form select, .filter-form button {
+  padding: 8px 12px; border-radius: 6px; border: 1px solid #ccc; margin-right: 6px;
+}
+.filter-form button { background: #007BFF; color: #fff; border: none; cursor: pointer; }
+.filter-form button:hover { background: #0056b3; }
+
+/* Таблиця */
+.styled-table { border-collapse: collapse; width: 100%; }
+.styled-table th, .styled-table td { padding: 12px 15px; border-bottom: 1px solid #ddd; }
+.styled-table th { background: #f4f4f4; }
+.styled-table tr:nth-child(even) { background: #fafafa; }
+.styled-table tr:hover { background: #f1f1f1; }
+
+/* Кнопки */
+.btn { padding: 8px 12px; border-radius: 6px; font-size: 14px; text-decoration: none; display: inline-block; border: 1px solid transparent; }
+.btn:hover { filter: brightness(0.97); }
+.btn-primary { background: #007bff; color: #fff; }
+.btn-edit { background: #ffc107; color: #333; }
+.btn-delete { background: #dc3545; color: #fff; border: none; }
+
+/* Форма завдання */
+.task-form { display: block; }
+.task-form label { display: block; margin-top: 10px; margin-bottom: 4px; color: #333; }
+.task-form input[type="text"], .task-form input[type="date"], .task-form select, .task-form textarea {
+  width: 100%; box-sizing: border-box; padding: 8px 10px; border-radius: 6px; border: 1px solid #ccc;
+}
+.row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 6px; }
+.form-actions { margin-top: 16px; display: flex; gap: 8px; align-items: center; }
+
+.alert { background: #fff3cd; color: #664d03; padding: 10px 12px; border: 1px solid #ffe69c; border-radius: 8px; margin-bottom: 12px; }
+
+/* Порожній список */
+.not-found { color: #888; font-style: italic; }
+
