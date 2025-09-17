@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>{% if mode == 'edit' %}Редагувати завдання{% else %}Додати завдання{% endif %}</h2>
+
+{% if error %}
+  <div class="alert">{{ error }}</div>
+{% endif %}
+
+<form method="post" class="task-form">
+  <label>Назва *</label>
+  <input type="text" name="title" value="{{ task.title }}" required>
+
+  <label>Опис</label>
+  <textarea name="description" rows="3">{{ task.description }}</textarea>
+
+  <div class="row">
+    <div class="col">
+      <label>Статус</label>
+      <select name="status">
+        <option value="new" {% if task.status == 'new' %}selected{% endif %}>Нове</option>
+        <option value="in_progress" {% if task.status == 'in_progress' %}selected{% endif %}>В процесі</option>
+        <option value="done" {% if task.status == 'done' %}selected{% endif %}>Виконано</option>
+      </select>
+    </div>
+    <div class="col">
+      <label>Пріоритет</label>
+      <select name="priority">
+        <option value="low" {% if task.priority == 'low' %}selected{% endif %}>Низький</option>
+        <option value="medium" {% if task.priority == 'medium' %}selected{% endif %}>Середній</option>
+        <option value="high" {% if task.priority == 'high' %}selected{% endif %}>Високий</option>
+      </select>
+    </div>
+    <div class="col">
+      <label>Дата</label>
+      <input type="date" name="due_date" value="{{ task.due_date }}">
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">{% if mode == 'edit' %}Зберегти{% else %}Створити{% endif %}</button>
+    <a href="{{ url_for('tasks_page') }}" class="btn">Скасувати</a>
+    {% if mode == 'edit' %}
+      <form action="{{ url_for('delete_task', task_id=task_id) }}" method="post" style="display:inline;">
+        <button type="submit" class="btn btn-delete" onclick="return confirm('Видалити?');">Видалити</button>
+      </form>
+    {% endif %}
+  </div>
+</form>
+
+{% endblock %}
