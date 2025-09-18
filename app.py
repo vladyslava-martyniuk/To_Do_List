@@ -60,7 +60,7 @@ def register():
     return render_template("auth.html", mode="register")
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])
 def login():
     """Вхід існуючого користувача."""
     if request.method == "POST":
@@ -78,7 +78,7 @@ def login():
     return render_template("auth.html", mode="login")
 
 
-@app.route("/logout")
+@app.route("/register")
 def logout():
     """Вихід з облікового запису."""
     session.pop("username", None)
@@ -189,3 +189,4 @@ def delete_task(task_id):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
