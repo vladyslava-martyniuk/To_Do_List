@@ -1,2 +1,11 @@
 # To_Do_List
-a team project designed to help users organize tasks and manage their time effectively. The application allows users to create, edit, and delete tasks, as well as track their completion status.
+To_Do_List – командний проєкт для організації завдань і ефективного керування часом ⏰.
+Додаток дозволяє:
+
+Створювати завдання 📝
+
+Редагувати завдання ✏️
+
+Видаляти завдання ❌
+
+Відстежувати статус виконання ✅
