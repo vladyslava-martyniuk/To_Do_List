@@ -1,32 +1,40 @@
 {% extends "base.html" %}
 
 {% block title %}
-  {% if mode == 'add' %}Add task{% elif mode == 'edit' %}Edit task{% endif %}
+  {% if mode == 'add' %}Додати завдання{% else %}Редагувати завдання{% endif %}
 {% endblock %}
 
 {% block content %}
 <h2>
-  {% if mode == 'add' %}Add task{% elif mode == 'edit' %}Edit task{% endif %}
+  {% if mode == 'add' %}Додати завдання{% else %}Редагувати завдання{% endif %}
 </h2>
 
-<form method="post">
-  <label>Task name:</label><br>
-  <input type="text" name="name" value="{{ task.name if task else '' }}" 
-         {% if mode == 'view' or mode == 'delete' %}readonly{% endif %}
-         required><br><br>
+{% if error %}
+<p style="color:red">{{ error }}</p>
+{% endif %}
 
-  <label>Task description:</label><br>
-  <textarea name="description" {% if mode == 'view' or mode == 'delete' %}readonly{% endif %} required>{{ task.description if task else '' }}</textarea><br><br>
-  <label>Task status:</label><br>
-  <select name="status" {% if mode == 'view' or mode == 'delete' %}readonly{% endif %} required>
-    <option value="todo" {% if task and task.status == 'todo' %}selected{% endif %}>To Do</option>
-    <option value="in_progress" {% if task and task.status == 'in_progress' %}selected{% endif %}>In Progress</option>
-    <option value="done" {% if task and task.status == 'done' %}selected{% endif %}>Done</option>
+{% if success %}
+<p style="color:green">{{ success }}</p>
+{% endif %}
+
+<form method="post">
+  <label>Назва завдання:</label><br>
+  <input type="text" name="title" value="{{ task.title if task else '' }}" required><br><br>
+
+  <label>Опис завдання:</label><br>
+  <textarea name="description" required>{{ task.description if task else '' }}</textarea><br><br>
+
+  <label>Статус:</label><br>
+  <select name="status" required>
+    <option value="new" {% if task and task.status == 'new' %}selected{% endif %}>Нове</option>
+    <option value="in_progress" {% if task and task.status == 'in_progress' %}selected{% endif %}>В процесі</option>
+    <option value="done" {% if task and task.status == 'done' %}selected{% endif %}>Виконано</option>
   </select><br><br>
-  {% if mode == 'add' %}
-    <button type="submit" id="adminButton">Add</button>
-  {% elif mode == 'edit' %}
-    <button type="submit" id="adminButton" >Save</button>
-  {% endif %}
+
+  <button type="submit">
+    {% if mode == 'add' %}Додати{% else %}Зберегти{% endif %}
+  </button>
 </form>
+
+<a href="{{ url_for('tasks_page', q=request.args.get('q'), status=request.args.get('status')) }}">⬅ Назад</a>
 {% endblock %}
