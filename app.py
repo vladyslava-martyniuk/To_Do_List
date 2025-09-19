@@ -47,17 +47,17 @@ def register():
         password = request.form.get("password") or ""
 
         if not username or not password:
-            return render_template("auth.html", mode="register", error="Заповніть усі поля!")
+            return render_template("register.html", mode="register", error="Заповніть усі поля!")
 
         if username in users:
-            return render_template("auth.html", mode="register", error="Користувач вже існує!")
+            return render_template("register.html", mode="register", error="Користувач вже існує!")
 
         salt, hashed_password = create_password_hash(password)
         users[username] = {"salt": salt, "hash": hashed_password}
         session["username"] = username
         return redirect(url_for("tasks_page"))
 
-    return render_template("auth.html", mode="register")
+    return render_template("register.html", mode="register")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -73,9 +73,9 @@ def login():
             session["username"] = username
             return redirect(url_for("tasks_page"))
         else:
-            return render_template("auth.html", mode="login", error="❌ Невірний логін або пароль!")
+            return render_template("register.html", mode="login", error="❌ Невірний логін або пароль!")
 
-    return render_template("auth.html", mode="login")
+    return render_template("register.html", mode="login")
 
 
 @app.route("/register")
