@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-  <div class="cotainer">
-  {% include '_header.html' %}
- {% block content %}{% endblock %}
-  {% include '_footer.html' %}
+  <div class="container">
+      {% include '_header.html' %}
+      <main>
+          {% block content %}{% endblock %}
+      </main>
+      {% include '_footer.html' %}
   </div>
 </body>
 </html>

@@ -1,55 +1,89 @@
 {% extends "base.html" %}
 
+{% block title %}Мої завдання{% endblock %}
+
 {% block content %}
+<div class="bg-white p-6 rounded-xl shadow-lg">
 
-<div class="header-row">
-  <h2>Список завдань</h2>
-  <a class="btn btn-primary" href="{{ url_for('add_task') }}">➕ Додати завдання</a>
+    <!-- Верхня панель з привітанням і виходом -->
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">Привіт, {{ username }} 👋</h1>
+        <a href="{{ url_for('logout') }}" 
+           class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+            Вийти
+        </a>
+    </div>
+
+    <!-- Пошук та фільтри -->
+    <form method="get" action="{{ url_for('tasks_page') }}" class="flex gap-2 mb-6">
+        <input type="text" name="q" value="{{ search }}" placeholder="Пошук..." 
+               class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <select name="status" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Всі</option>
+            <option value="new" {% if status == 'new' %}selected{% endif %}>Нові</option>
+            <option value="in_progress" {% if status == 'in_progress' %}selected{% endif %}>В процесі</option>
+            <option value="done" {% if status == 'done' %}selected{% endif %}>Виконані</option>
+        </select>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+            🔍
+        </button>
+    </form>
+
+    <!-- Кнопка додавання нового завдання -->
+    <div class="mb-6">
+        <a href="{{ url_for('add_task') }}" 
+           class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+            ➕ Додати завдання
+        </a>
+    </div>
+
+    <!-- Список завдань у таблиці -->
+    <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+            <thead>
+                <tr class="bg-gray-200 text-gray-700">
+                    <th class="px-4 py-2 text-left">Назва</th>
+                    <th class="px-4 py-2 text-left">Опис</th>
+                    <th class="px-4 py-2 text-left">Статус</th>
+                    <th class="px-4 py-2 text-center">Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-4 py-2 font-medium">{{ task.title }}</td>
+                        <td class="px-4 py-2">{{ task.description }}</td>
+                        <td class="px-4 py-2">
+                            {% if task.status == "new" %}
+                                <span class="text-blue-600 font-semibold">Нове</span>
+                            {% elif task.status == "in_progress" %}
+                                <span class="text-yellow-600 font-semibold">В процесі</span>
+                            {% elif task.status == "done" %}
+                                <span class="text-green-600 font-semibold">Виконано</span>
+                            {% endif %}
+                        </td>
+                        <td class="px-4 py-2 text-center flex justify-center gap-2">
+                            <a href="{{ url_for('edit_task', task_id=task.id, q=search, status=status) }}" 
+                               class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600">
+                                ✏️
+                            </a>
+                            <form method="post" action="{{ url_for('delete_task', task_id=task.id, q=search, status=status) }}" 
+                                  onsubmit="return confirm('Видалити це завдання?');">
+                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600">
+                                    🗑️
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center text-gray-500 py-4">Завдань поки немає</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
 </div>
-
-<form method="get" action="{{ url_for('tasks_page') }}" class="filter-form">
-    <input type="text" name="q" placeholder="🔍 Пошук за назвою" value="{{ search or '' }}">
-    <select name="status">
-        <option value="">Статус</option>
-        <option value="new" {% if status=='new' %}selected{% endif %}>Нове</option>
-        <option value="in_progress" {% if status=='in_progress' %}selected{% endif %}>В процесі</option>
-        <option value="done" {% if status=='done' %}selected{% endif %}>Виконано</option>
-    </select>
-    <button type="submit">Фільтрувати</button>
-</form>
-
-{% if tasks %}
-<table class="styled-table">
-    <thead>
-        <tr>
-            <th>Назва</th>
-            <th>Опис</th>
-            <th>Статус</th>
-            <th>Дії</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for task in tasks %}
-        <tr>
-            <td>{{ task.title }}</td>
-            <td>{{ task.description }}</td>
-            <td>
-                {% if task.status == 'done' %} ✅ Виконано
-                {% elif task.status == 'in_progress' %} 🔄 В процесі
-                {% else %} 📝 Нове {% endif %}
-            </td>
-            <td class="actions">
-                <a href="{{ url_for('edit_task', task_id=task.id, q=search, status=status) }}" class="btn btn-edit">✏️ Редагувати</a>
-                <form action="{{ url_for('delete_task', task_id=task.id, q=search, status=status) }}" method="post" style="display:inline;">
-                    <button type="submit" class="btn btn-delete" onclick="return confirm('Видалити?');">🗑 Видалити</button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<p class="not-found">Завдань не знайдено.</p>
-{% endif %}
-
 {% endblock %}
+
