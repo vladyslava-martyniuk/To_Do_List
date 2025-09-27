@@ -3,43 +3,44 @@
 {% block title %}Мої завдання{% endblock %}
 
 {% block content %}
-<div class="bg-white p-6 rounded-xl shadow-lg">
+<div class="first-div">
+  
 
     <!-- Верхня панель з привітанням і виходом -->
-    <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-gray-800">Привіт, {{ username }} 👋</h1>
-        <a href="{{ url_for('logout') }}" 
-           class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
-            Вийти
-        </a>
-    </div>
+        <h1>To Do Tasker</h1>
+        <p>Організуй свій день.  Швидко, легко та зручно</p>
+        <h2 class="tasks-greating" >Привіт, {{ username }} !</h2>
+       
+    
 
     <!-- Пошук та фільтри -->
-    <form method="get" action="{{ url_for('tasks_page') }}" class="flex gap-2 mb-6">
-        <input type="text" name="q" value="{{ search }}" placeholder="Пошук..." 
-               class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <select name="status" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+     <div class="tasks_filters centered">
+    <form method="get" action="{{ url_for('tasks_page') }}" class="task_filter_form" >
+        <input type="text" name="q" value="{{ search }}" placeholder="Пошук..."  class="task_filter_input">
+        <select name="status"class="task_filter_select">
             <option value="">Всі</option>
             <option value="new" {% if status == 'new' %}selected{% endif %}>Нові</option>
             <option value="in_progress" {% if status == 'in_progress' %}selected{% endif %}>В процесі</option>
             <option value="done" {% if status == 'done' %}selected{% endif %}>Виконані</option>
         </select>
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+        <button type="submit" class="task_filter_button">
             🔍
         </button>
     </form>
-
+</div>
     <!-- Кнопка додавання нового завдання -->
-    <div class="mb-6">
+    <div class="btn_wrapper">
+        <button type="button" class="add_task-button">
         <a href="{{ url_for('add_task') }}" 
-           class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+           class="add_task-link ">
             ➕ Додати завдання
         </a>
+    </button>
     </div>
 
     <!-- Список завдань у таблиці -->
-    <div class="overflow-x-auto">
-        <table class="w-full border-collapse">
+    <div class="table-wrapper">
+        <table class="table-glass">
             <thead>
                 <tr class="bg-gray-200 text-gray-700">
                     <th class="px-4 py-2 text-left">Назва</th>
@@ -55,24 +56,22 @@
                         <td class="px-4 py-2">{{ task.description }}</td>
                         <td class="px-4 py-2">
                             {% if task.status == "new" %}
-                                <span class="text-blue-600 font-semibold">Нове</span>
+                                <span class="status-badge status-new">Нове</span>
                             {% elif task.status == "in_progress" %}
-                                <span class="text-yellow-600 font-semibold">В процесі</span>
+                                <span class="status-badge status-progress">В процесі</span>
                             {% elif task.status == "done" %}
-                                <span class="text-green-600 font-semibold">Виконано</span>
+                               <span class="status-badge status-done">Виконано</span>
                             {% endif %}
                         </td>
                         <td class="px-4 py-2 text-center flex justify-center gap-2">
-                            <a href="{{ url_for('edit_task', task_id=task.id, q=search, status=status) }}" 
-                               class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600">
-                                ✏️
-                            </a>
-                            <form method="post" action="{{ url_for('delete_task', task_id=task.id, q=search, status=status) }}" 
-                                  onsubmit="return confirm('Видалити це завдання?');">
-                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600">
-                                    🗑️
-                                </button>
-                            </form>
+                            <form action="{{ url_for('edit_task', task_id=task.id, q=search, status=status) }}" method="get">
+    <button type="submit" class="action_button">✏️</button>
+</form>
+
+                          <form method="post" action="{{ url_for('delete_task', task_id=task.id, q=search, status=status) }}" 
+                            onsubmit="return confirm('Видалити це завдання?');">
+                           <button type="submit" class="action_button">🗑️</button>
+</form>
                         </td>
                     </tr>
                 {% else %}

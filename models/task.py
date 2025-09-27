@@ -19,5 +19,5 @@ class Task(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=True)
     user: Mapped["User"] = relationship("User", back_populates="tasks")
 
-    def repr(self):
-        return f"Task(id={self.id!r}, name={self.name!r}, status={self.status!r})"
+    def __repr__(self):
+     return f"Task(id={self.id!r}, title={self.title!r}, description={self.description!r}, status={self.status!r})"

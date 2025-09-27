@@ -1,69 +1,457 @@
 /* Загальні стилі */
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+     background: linear-gradient(to top left, #33ccff 0%, #9933ff 100%);
+     font-family: 'Inter', sans-serif;
+}
+.first-div {
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.40);
+}
+.tasks-greating{
+      font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    text-align: center;
+}
+/* Центрування контейнера */
+.tasks_filters.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
+/* Горизонтальна форма фільтрів */
+.task_filter_form.horizontal {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+    max-width: 900px;
+    
+}
+
+/* Інпут і селект */
+.task_filter_input,
+.task_filter_select {
+    flex: 1;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.85);
+    color: #333;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.task_filter_input:focus,
+.task_filter_select:focus {
+    background: #fff;
+    box-shadow: 0 0 0 2px #33ccff;
+}
+
+/* Кнопка */
+.task_filter_button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #33ccff, #9933ff);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.task_filter_button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+
+.btn_wrapper{
+    display: flex;
+    justify-content: center;
+}
+.add_task-button{
+     width: 415px;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #33ccff, #9933ff);
+}
+.add_task-link{
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
 /* Контейнер */
 .container {
-    max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 5px 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.40);
 }
 
 /* Header */
 .header_container {
     display: flex;
-     background-color: #34495e;
+     background-color: transparent;
     justify-content: space-between;
     align-items: center;
+    width: 1240px;
+     border-radius: 10px;
 }
 .nav_list {
     list-style: none;
     display: flex;
     gap: 40px;
 }
-
-/* Footer */
-footer {
-    background-color: #34495e;
-    color: #fff;
-    padding: 10px 20px;
-    text-align: center;
-    margin-top: 20px;
+.nav_link{
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: 600;
+  transition: color var(--transition);
 }
+.nav_link:hover {
+  color: #ffffff ;
+}
+
 
 /* Основний контент */
 main {
     padding: 20px;
     min-height: 300px;
 }
-
-/* Посилання */
-a {
-    color: #3498db;
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #e5e7eb;
+}
+p {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #e5e7eb;
+}
+.logo_link {
     text-decoration: none;
+    color: #e5e7eb;
+    text-align: center;
+    font-size: 25px;
 }
 
-a:hover {
+/* Форми */
+.body_login_and_register {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to top left, #33ccff 0%, #9933ff 100%);
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Контейнер форми */
+.login_and_register-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(14px) saturate(180%);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    border-radius: 18px;
+    padding: 40px 55px;
+    width: 450px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    color: #fff;
+}
+/* Заголовок */
+.login_and_register-box h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Лейбли */
+.login_and_register-box label {
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #f1f1f1;
+}
+
+/* Інпути */
+.login_and_register-box input {
+    width: 422px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #333;
+    background: rgba(255, 255, 255, 0.85);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.login_and_register-box input:focus {
+    background: #fff;
+    box-shadow: 0 0 0 2px #33ccff;
+}
+
+/* Кнопка */
+.login_and_register-box button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #33ccff, #9933ff);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.login_and_register-box button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Лінк під формою */
+.login_and_register-box p {
+    margin-top: 16px;
+    font-size: 14px;
+    color: #e5e5e5;
+}
+
+.login_and_register-box a {
+    color: #33ccff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.login_and_register-box a:hover {
+    text-decoration: underline;
+}
+/* Контейнер для сторінки додавання/редагування */
+.body_task_form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(to top left, #33ccff 0%, #9933ff 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Коробка з формою */
+.task_form-box {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-radius: 18px;
+    padding: 40px 35px;
+    width: 460px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    color: #fff;
+}
+
+/* Заголовок */
+.task_form-box h2 {
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Лейбли */
+.task_form-box label {
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #f1f1f1;
+}
+
+/* Інпути */
+.task_form-box input,
+.task_form-box textarea,
+.task_form-box select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #333;
+    background: rgba(255, 255, 255, 0.85);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.task_form-box input:focus,
+.task_form-box textarea:focus,
+.task_form-box select:focus {
+    background: #fff;
+    box-shadow: 0 0 0 2px #33ccff;
+}
+
+/* Кнопка */
+.task_form-box button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #33ccff, #9933ff);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.task_form-box button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Посилання Назад */
+.task_form-box a {
+    display: inline-block;
+    margin-top: 12px;
+    color: #33ccff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.task_form-box a:hover {
     text-decoration: underline;
 }
 
-/* Кнопки */
-button, .btn {
-    padding: 10px 20px;
-    border: none;
-    background-color: #3498db;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.3s;
+
+/* Контейнер таблиці */
+.table-wrapper {
+  margin: 40px auto;
+  padding: 20px;
+  max-width: 900px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
-button:hover, .btn:hover {
-    background-color: #2980b9;
+/* Таблиця */
+.table-glass {
+  width: 100%;
+  border-collapse: collapse;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+/* Заголовки */
+.table-glass thead th {
+  text-align: left;
+  font-weight: 700;
+  padding: 16px 18px;
+  color: #ffffff;
+  font-size: 1.05rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Рядки */
+.table-glass tbody td {
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e5e7eb;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+/* Hover ефект */
+.table-glass tbody tr:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px);
+}
+
+/* Останній рядок без бордеру */
+.table-glass tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Бейджі статусів */
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  min-width: 80px;
+}
+
+/* Кольори для статусів */
+.status-new {
+  background: linear-gradient(90deg, #38bdf8, #3b82f6);
+}
+
+.status-progress {
+  background: linear-gradient(90deg, #f97316, #f59e0b);
+}
+
+.status-done {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+.action_button {
+    padding: 6px 12px;
+    border-radius: 12px;
+    border: none;
+    background-color:transparent;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    margin-bottom: 10px;
+}
+.action_link{
+    text-decoration: none;
+}
+.action_link:hover{
+   cursor: pointer;
+   opacity: 0.9;
+   transform: translateY(-2px);
+}
+
+
+
+/* Footer */
+footer {
+    background-color: transparent;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    margin-top: 165px;
+}
+.footer_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1240px;
+    border-radius: 10px;
 }

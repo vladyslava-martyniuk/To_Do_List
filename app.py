@@ -86,7 +86,7 @@ def tasks_page():
     with SessionLocal() as db:
         query = db.query(Task).filter(Task.user_id == session["user_id"])
         if q:
-            query = query.filter(Task.name.ilike(f"%{q}%"))
+            query = query.filter(Task.title.ilike(f"%{q}%"))
         if status:
             query = query.filter(Task.status == status)
         tasks = query.all()
@@ -125,7 +125,11 @@ def edit_task(task_id):
         return redirect(url_for("login"))
 
     with SessionLocal() as db:
-        task = db.query(Task).filter(Task.id == task_id, Task.user_id == session["user_id"]).first()
+        task = db.query(Task).filter(
+            Task.id == task_id,
+            Task.user_id == session["user_id"]
+        ).first()
+
         if not task:
             return "Завдання не знайдено", 404
 
@@ -137,13 +141,14 @@ def edit_task(task_id):
             if not title:
                 return render_template("task_form.html", mode="edit", task=task, error="Вкажіть назву завдання!")
 
-            task.name = title
+            task.title = title        
             task.description = description
             task.status = new_status
             db.commit()
             return redirect(url_for("tasks_page"))
 
     return render_template("task_form.html", mode="edit", task=task)
+
 
 # ------------------- ВИДАЛЕННЯ ЗАВДАННЯ -------------------
 @app.route("/delete/<int:task_id>", methods=["POST"])
