@@ -2,8 +2,12 @@
 body {
     margin: 0;
     padding: 0;
-     background: linear-gradient(to top left, #33ccff 0%, #9933ff 100%);
-     font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to top left, rgba(51, 204, 255, 0.7), rgba(153, 51, 255, 0.7)),
+                url('https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 .first-div {
     padding: 10px;

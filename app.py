@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from sqlalchemy import func
 from base import create_db, SessionLocal
 from models.user import User
 from models.task import Task
@@ -80,18 +81,28 @@ def tasks_page():
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    q = request.args.get("q", "").lower()
+    q = request.args.get("q", "").strip()
     status = request.args.get("status", "")
 
     with SessionLocal() as db:
         query = db.query(Task).filter(Task.user_id == session["user_id"])
+        
         if q:
-            query = query.filter(Task.title.ilike(f"%{q}%"))
+         
+            query = query.filter(func.lower(Task.title).like(f"%{q.lower()}%"))
+        
         if status:
             query = query.filter(Task.status == status)
+        
         tasks = query.all()
 
-    return render_template("tasks.html", tasks=tasks, search=q, status=status, username=session["username"])
+    return render_template(
+        "tasks.html", 
+        tasks=tasks, 
+        search=q, 
+        status=status, 
+        username=session["username"]
+    )
 
 # ------------------- ДОДАВАННЯ ЗАВДАННЯ -------------------
 @app.route("/add", methods=["GET", "POST"])
